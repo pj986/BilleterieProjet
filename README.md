@@ -105,3 +105,6 @@ BilletterieProjet/
 │   └── view/            # Interfaces graphiques
 ├── resources/
 │   └── billetterie.png  # Diagramme UML
+├── database/
+│   └── billetterie.sql  # Structure SQL
+└── README.md
