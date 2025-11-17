@@ -62,6 +62,85 @@ billetterie.sql
 
 Ce script contient la structure complète de la base (tables, clés primaires/étrangères, contraintes, etc.).
 
+Ce fichier contient :
+
+La création complète des tables (avec contraintes)
+
+Les clés primaires & étrangères
+
+Les types de données adaptés à l’application Java
+
+Les options de suppression en cascade (ON DELETE CASCADE, ON DELETE SET NULL)
+
+DROP TABLE IF EXISTS ...
+SET FOREIGN_KEY_CHECKS = 0;
+
+👉 Cela permet d’importer la base sans erreur, même si les tables existent déjà.
+
+# 📦 Jeu de Données (volumétrie réaliste)
+
+Pour simuler un environnement réel, un second script a été généré :
+
+📄 billetterie_data.sql
+(inclus directement à la suite dans le fichier principal)
+
+Il contient un jeu de données complet basé sur une thématique cohérente.
+
+🎨 Thématique : Festival des Cultures & Saveurs
+
+Les données sont basées sur un univers culturel et gastronomique :
+
+🍷 Dégustations
+
+🎤 Concerts
+
+🍣 Évènements culinaires
+
+🎭 Spectacles d'humour et shows culturels
+
+🌍 Villes françaises principales
+
+📊 Volumétrie incluse dans le script :
+
+10 Lieux
+
+10 Spectacles
+
+20 Séances
+
+60 Clients
+
+100 Billets
+
+Les données sont réalistes et compatibles avec la logique métier :
+
+billets aléatoires mais cohérents
+
+prix basés sur le spectacle
+
+clients distribués sur les séances
+
+catégories : standard, premium, etudiant
+
+
+#  🧰 Installation et Importation de la Base (phpMyAdmin)
+1️⃣ Ouvrir phpMyAdmin via WampServer64
+
+→ http://localhost/phpmyadmin
+
+2️⃣ Créer une base vide :
+CREATE DATABASE billetterie CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+3️⃣ Importer le fichier billetterie.sql
+
+Onglet Importer
+
+Sélectionner le fichier
+
+Valider
+
+✔️ Tous les tables + données seront créés proprement
+✔️ Compatible avec les versions MySQL de WampServer
 # Étapes de mise en place
 
 Ouvrir phpMyAdmin (via WampServer64).
@@ -86,8 +165,7 @@ reservation
 paiement
 
 💾 Outils utilisés
-
-MySQL Workbench / phpMyAdmin — création et gestion de la base
+ phpMyAdmin — création et gestion de la base
 
 WampServer64 — environnement local (Apache, MySQL, PHP)
 
@@ -97,14 +175,19 @@ Java (MVC) — logique applicative (modèles, vues, contrôleurs)
 
 GitHub — hébergement du projet
 
-🚀 Structure du projet (Java)
+# 📁 Structure du Projet
 BilletterieProjet/
+│
 ├── src/
-│   ├── model/           # Classes du modèle (Spectacle, Billet, Client, etc.)
-│   ├── controller/      # Contrôleurs pour la gestion des interactions
-│   └── view/            # Interfaces graphiques
-├── resources/
-│   └── billetterie.png  # Diagramme UML
+│   ├── model/           # Classes Java (Spectacle, Billet, Client…)
+│   ├── controller/      # Contrôleurs MVC
+│   └── view/            # Interfaces graphiques (Swing/JavaFX)
+│
 ├── database/
-│   └── billetterie.sql  # Structure SQL
+│   ├── billetterie.sql          # Structure complète
+│   └── billetterie_data.sql     # Données volumétriques
+│
+├── resources/
+│   └── billetterie.png          # Modélisation UML
+│
 └── README.md
