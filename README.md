@@ -164,6 +164,62 @@ reservation
 
 paiement
 
+🏠 Accueil
+
+Page d’accueil centrale
+
+Navigation vers :
+
+Connexion
+
+Inscription
+
+Liste des événements
+
+📝 Inscription
+
+Création de compte utilisateur
+
+Vérification des champs obligatoires
+
+Vérification de la correspondance des mots de passe
+
+Messages d’erreur et de succès dynamiques (Label JavaFX + CSS)
+
+Navigation vers la page de connexion
+
+🔑 Connexion
+
+Connexion utilisateur (simulation, prêt pour SQL)
+
+Gestion des erreurs (champs vides / identifiants incorrects)
+
+Navigation vers :
+
+Accueil
+
+Inscription
+
+🎟️ Événements
+
+Liste d’événements générée dynamiquement depuis MySQL
+
+Affichage sous forme de cartes (type Eventbrite)
+
+Informations affichées :
+
+Image
+
+Titre
+
+Date
+
+Lieu
+
+Bouton « Acheter »
+
+Retour vers la page d’accueil
+
 💾 Outils utilisés
  phpMyAdmin — création et gestion de la base
 
@@ -175,19 +231,36 @@ Java (MVC) — logique applicative (modèles, vues, contrôleurs)
 
 GitHub — hébergement du projet
 
-# 📁 Structure du Projet
-BilletterieProjet/
-│
-├── src/
-│   ├── model/           # Classes Java (Spectacle, Billet, Client…)
-│   ├── controller/      # Contrôleurs MVC
-│   └── view/            # Interfaces graphiques (Swing/JavaFX)
-│
-├── database/
-│   ├── billetterie.sql          # Structure complète
-│   └── billetterie_data.sql     # Données volumétriques
-│
-├── resources/
-│   └── billetterie.png          # Modélisation UML
-│
-└── README.md
+# 🧱 Architecture du projet (MVC)
+src/
+ ├─ app/
+ │    └─ App.java                  # Point d’entrée JavaFX
+ │
+ ├─ controllers/
+ │    ├─ HomeController.java
+ │    ├─ LoginController.java
+ │    ├─ InscriptionController.java
+ │    └─ EventsController.java
+ │
+ ├─ views/
+ │    ├─ Home.fxml
+ │    ├─ Login.fxml
+ │    ├─ Inscription.fxml
+ │    └─ Events.fxml
+ │
+ ├─ models/
+ │    └─ Evenement.java            # Modèle métier
+ │
+ ├─ dao/
+ │    └─ EvenementDAO.java         # Accès aux données (CRUD)
+ │
+ ├─ database/
+ │    └─ Database.java             # Connexion MySQL
+ │
+ ├─ styles/
+ │    └─ app.css                   # Style global JavaFX
+ │
+ └─ assets/
+      ├─ event1.jpg
+      ├─ event2.jpg
+      └─ event3.jpg
