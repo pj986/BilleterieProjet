@@ -1,0 +1,32 @@
+# ================================
+# Java / JavaFX / VS Code .gitignore
+# ================================
+
+# --- Java compiled files ---
+*.class
+
+# --- Java build directories ---
+bin/
+out/
+target/
+
+# --- VS Code config ---
+.vscode/
+
+# --- JavaFX local SDK (NE PAS PUSH) ---
+javafx-sdk*/
+
+# --- Log files ---
+*.log
+
+# --- System files ---
+.DS_Store
+Thumbs.db
+
+# --- IntelliJ IDEA files ---
+*.iml
+.idea/
+
+# --- Temporary files ---
+*.tmp
+*.temp

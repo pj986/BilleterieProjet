@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.EventsController"
+            stylesheets="@../styles/app.css">
+
+    <children>
+
+        <!-- Titre principal -->
+        <Label text="Événements disponibles"
+               layoutX="40" layoutY="30"
+               styleClass="title"/>
+
+        <!-- Bouton Retour Accueil -->
+        <Button text="← Retour"
+                layoutX="40" layoutY="80"
+                styleClass="btn-secondary"
+                onAction="#goToHome"/>
+
+        <!-- Zone scrollable pour la liste d'événements -->
+        <ScrollPane layoutX="40"
+                    layoutY="130"
+                    prefWidth="900"
+                    prefHeight="500"
+                    fitToWidth="true"
+                    hbarPolicy="NEVER">
+
+        
+        <content>
+
+
+        <!-- Grille d'événements -->
+        <GridPane fx:id="gridEvents"
+                  layoutX="40"
+                  layoutY="130"
+                  hgap="40"
+                  vgap="30">
+
+        </content>
+
+        </ScrollPane>
+
+        </GridPane>
+
+    </children>
+
+</AnchorPane>
