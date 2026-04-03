@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.EventsController">
+
+    <!-- TOP BAR -->
+    <top>
+        <VBox spacing="10">
+
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Événements"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+            <!-- FILTRES CATEGORIE -->
+            <HBox spacing="10">
+                <Button text="Tous" onAction="#filterAll"/>
+                <Button text="Cinéma" onAction="#filterCinema"/>
+                <Button text="Sport" onAction="#filterSport"/>
+                <Button text="Concert" onAction="#filterConcert"/>
+            </HBox>
+
+            <!-- RECHERCHE -->
+            <HBox spacing="10">
+                <TextField fx:id="searchField"
+                           promptText="🔍 Rechercher un événement..."
+                           prefWidth="300"
+                           style="-fx-background-radius: 10; -fx-padding: 8;"/>
+            </HBox>
+
+            <!-- TRI -->
+            <HBox spacing="10">
+                <Button text="Date ↑" onAction="#sortByDateAsc"/>
+                <Button text="Date ↓" onAction="#sortByDateDesc"/>
+                <Button text="Prix ↑" onAction="#sortByPriceAsc"/>
+                <Button text="Prix ↓" onAction="#sortByPriceDesc"/>
+            </HBox>
+
+
+
+            <!-- COMPTEUR -->
+            <Label fx:id="lblCount"
+                   style="-fx-font-weight: bold;"/>
+
+        </VBox>
+    </top>
+
+    <!-- CONTENU -->
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox fx:id="eventsContainer" spacing="15">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
