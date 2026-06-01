@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.EventsController"
+            styleClass="page">
+
+    <!-- TOP BAR -->
+    <top>
+        <VBox spacing="12" styleClass="events-header">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Button text="← Retour"
+                    onAction="#goBack"
+                    styleClass="back-button"/>
+
+            <Label text="🎭 Événements disponibles"
+                   styleClass="page-title"/>
+
+            <Label text="Consultez les spectacles, concerts, séances sportives et événements disponibles à la réservation."
+                   styleClass="page-subtitle"/>
+
+            <!-- FILTRES CATEGORIE -->
+            <HBox spacing="10">
+                <Button text="Tous" onAction="#filterAll" styleClass="secondary-action-button"/>
+                <Button text="Cinéma" onAction="#filterCinema" styleClass="secondary-action-button"/>
+                <Button text="Sport" onAction="#filterSport" styleClass="secondary-action-button"/>
+                <Button text="Concert" onAction="#filterConcert" styleClass="secondary-action-button"/>
+                <Button text="Spectacle" onAction="#filterSpectacle" styleClass="secondary-action-button"/>
+            </HBox>
+
+            <!-- RECHERCHE -->
+            <HBox spacing="10">
+                <TextField fx:id="searchField"
+                           promptText="🔍 Rechercher un événement..."
+                           prefWidth="350"
+                           styleClass="search-field"/>
+
+                <Button text="Rechercher"
+                        onAction="#handleSearch"
+                        styleClass="primary-action-button"/>
+            </HBox>
+
+            <!-- TRI -->
+            <HBox spacing="10">
+                <Button text="Date ↑" onAction="#sortByDateAsc" styleClass="secondary-action-button"/>
+                <Button text="Date ↓" onAction="#sortByDateDesc" styleClass="secondary-action-button"/>
+                <Button text="Prix ↑" onAction="#sortByPriceAsc" styleClass="secondary-action-button"/>
+                <Button text="Prix ↓" onAction="#sortByPriceDesc" styleClass="secondary-action-button"/>
+            </HBox>
+
+            <Label fx:id="lblCount"
+                   text="0 événement(s)"
+                   styleClass="stat-info"/>
+
+        </VBox>
+    </top>
+
+    <!-- CONTENU -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="dashboard-scroll">
+            <content>
+                <FlowPane fx:id="eventsContainer"
+                          hgap="20"
+                          vgap="20"
+                          prefWrapLength="900"
+                          styleClass="events-container">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25"/>
+                    </padding>
+                </FlowPane>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

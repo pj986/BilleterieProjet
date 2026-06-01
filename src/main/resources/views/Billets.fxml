@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.BilletsController"
+            prefWidth="1100"
+            prefHeight="700"
+            styleClass="page">
+
+    <VBox spacing="15"
+          AnchorPane.topAnchor="20"
+          AnchorPane.leftAnchor="20"
+          AnchorPane.rightAnchor="20"
+          AnchorPane.bottomAnchor="20">
+
+        <Label text="Gestion des billets"
+               styleClass="page-title"/>
+
+        <HBox spacing="10">
+            <Button text="← Retour"
+                    onAction="#goBack"
+                    styleClass="back-button"/>
+            <TextField fx:id="searchField"
+                       promptText="Rechercher par numéro, client ou statut"
+                       HBox.hgrow="ALWAYS"/>
+
+            <Button text="Rechercher"
+                    onAction="#handleSearch"
+                    styleClass="primary-button"/>
+
+            <Button text="Actualiser"
+                    onAction="#loadBillets"
+                    styleClass="secondary-button"/>
+        </HBox>
+
+        <GridPane hgap="10" vgap="10">
+
+            <Label text="ID Client :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="clientIdField"
+                       promptText="Ex : 1"
+                       GridPane.rowIndex="0"
+                       GridPane.columnIndex="1"/>
+
+            <Label text="ID Séance :" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+            <TextField fx:id="seanceIdField"
+                       promptText="Ex : 1"
+                       GridPane.rowIndex="0"
+                       GridPane.columnIndex="3"/>
+
+            <Label text="Tarif :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="tarifCombo"
+                      GridPane.rowIndex="1"
+                      GridPane.columnIndex="1"/>
+
+            <Label text="Prix final :" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+            <TextField fx:id="prixFinalField"
+                       promptText="Ex : 59.90"
+                       GridPane.rowIndex="1"
+                       GridPane.columnIndex="3"/>
+
+            <Label text="Place :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="placeField"
+                       promptText="Ex : A12"
+                       GridPane.rowIndex="2"
+                       GridPane.columnIndex="1"/>
+
+            <Label text="Statut :" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+            <ComboBox fx:id="statutCombo"
+                      GridPane.rowIndex="2"
+                      GridPane.columnIndex="3"/>
+
+        </GridPane>
+
+        <HBox spacing="10">
+            <Button text="Créer billet"
+                    onAction="#handleCreate"
+                    styleClass="primary-button"/>
+
+            <Button text="Valider"
+                    onAction="#handleValidate"
+                    styleClass="success-button"/>
+
+            <Button text="Annuler"
+                    onAction="#handleCancel"
+                    styleClass="danger-button"/>
+
+            <Button text="Rembourser"
+                    onAction="#handleRefund"
+                    styleClass="warning-button"/>
+        </HBox>
+
+        <TableView fx:id="billetTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                <TableColumn fx:id="numeroColumn" text="Numéro unique" prefWidth="180"/>
+                <TableColumn fx:id="clientColumn" text="Client" prefWidth="150"/>
+                <TableColumn fx:id="seanceColumn" text="Séance" prefWidth="100"/>
+                <TableColumn fx:id="tarifColumn" text="Tarif" prefWidth="120"/>
+                <TableColumn fx:id="prixColumn" text="Prix final" prefWidth="100"/>
+                <TableColumn fx:id="placeColumn" text="Place" prefWidth="100"/>
+                <TableColumn fx:id="statutColumn" text="Statut" prefWidth="120"/>
+                <TableColumn fx:id="dateColumn" text="Date achat" prefWidth="180"/>
+            </columns>
+        </TableView>
+
+        <Label fx:id="messageLabel"
+               styleClass="message-label"/>
+
+    </VBox>
+
+</AnchorPane>

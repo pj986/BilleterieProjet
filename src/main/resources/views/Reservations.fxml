@@ -1,0 +1,17 @@
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.ReservationsController"
+      spacing="20"
+      alignment="CENTER"
+      styleClass="root">
+
+    <Label text="📋 Mes réservations" styleClass="title"/>
+    <Button text="← Retour"
+            onAction="#goBack"
+            styleClass="back-button"/>
+
+    <FlowPane fx:id="reservationsContainer"
+              hgap="15"
+              vgap="15"/>
+
+</VBox>

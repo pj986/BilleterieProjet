@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.HomeController"
+            styleClass="root">
+
+    <children>
+
+        <VBox spacing="25"
+              alignment="TOP_CENTER"
+              AnchorPane.topAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0"
+              style="-fx-padding: 40;">
+
+            <!-- HEADER -->
+            <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="section">
+
+                <Label fx:id="lblUser" styleClass="user-badge"/>
+                <Label fx:id="lblReservations" styleClass="badge"/>
+
+                <Button fx:id="btnLogout"
+                        text="🚪 Déconnexion"
+                        styleClass="btn-secondary"
+                        onAction="#logout"/>
+
+            </HBox>
+            <!-- TITRE -->
+            <Label text="🎟️ Billetterie"
+                   styleClass="title"/>
+
+            <!-- ACTIONS PRINCIPALES -->
+            <HBox spacing="20" alignment="CENTER">
+
+                <!-- EVENTS -->
+                <VBox spacing="10" alignment="CENTER" styleClass="card">
+                    <Label text="🎟️ Événements" styleClass="subtitle"/>
+                    <Button fx:id="btnEvents"
+                            text="Voir"
+                            styleClass="btn-primary"
+                            onAction="#goToEvents"/>
+                </VBox>
+
+                <!-- LOGIN -->
+                <VBox spacing="10" alignment="CENTER" styleClass="card">
+                    <Label text="🔑 Compte" styleClass="subtitle"/>
+                    <Button fx:id="btnLogin"
+                            text="Connexion"
+                            styleClass="btn-secondary"
+                            onAction="#goToLogin"/>
+                    <Button fx:id="btnRegister"
+                            text="Inscription"
+                            styleClass="btn-secondary"
+                            onAction="#goToRegister"/>
+                </VBox>
+
+                <!-- ADMIN -->
+                <VBox spacing="10" alignment="CENTER" styleClass="card">
+                    <Label text="📊 Admin" styleClass="subtitle"/>
+                    <Button fx:id="btnAdmin"
+                            text="Dashboard"
+                            styleClass="btn-primary"
+                            onAction="#goToAdmin"/>
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+
+    </children>
+</AnchorPane>

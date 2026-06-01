@@ -1,0 +1,521 @@
+/* ============================
+   STYLES GLOBAUX APPLICATION
+   ============================ */
+
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: linear-gradient(to bottom right, #eef2f7, #e3e8f0);
+}
+
+/* Centrage général des pages simples (comme inscription / login) */
+.page-center {
+    -fx-alignment: center;
+}
+
+/* ============================
+   CARDS (les blocs blancs)
+   ============================ */
+
+.card {
+    -fx-background-color: white;
+    -fx-padding: 24;
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);
+}
+/* HOVER ANIMATION */
+.card:hover {
+    -fx-translate-y: -3;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 25, 0, 0, 6);
+}
+.card-event {
+    -fx-background-color: white;
+    -fx-padding: 14;
+    -fx-background-radius: 14;
+    -fx-pref-width: 200;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 3);
+}
+
+.card-event:hover {
+    -fx-translate-y: -5;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+.btn-primary {
+    -fx-background-color: linear-gradient(to right, #0078D7, #4f46e5);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 18;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: linear-gradient(to right, #005fa3, #4338ca);
+}
+.input {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: #e2e6ee;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 8 10;
+    -fx-text-fill: #333;
+}
+
+.input:focused {
+    -fx-border-color: #6366f1;
+    -fx-border-width: 1.8;
+}
+.btn-primary {
+    -fx-cursor: hand;
+}
+
+.hyperlink {
+    -fx-text-fill: #4f46e5;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #3730a3;
+}
+
+/* Variante plus petite si besoin */
+.card-small {
+    -fx-padding: 16;
+    -fx-background-radius: 12;
+}
+
+/* ============================
+   TITRES & TEXTES
+   ============================ */
+
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+/* labels standards */
+.label {
+    -fx-text-fill: #333333;
+}
+
+/* messages d’erreur */
+.label-error {
+    -fx-text-fill: #E74C3C;
+    -fx-font-size: 12px;
+}
+
+/* messages de succès */
+.label-success {
+    -fx-text-fill: #27AE60;
+    -fx-font-size: 12px;
+}
+
+/* ============================
+   CHAMPS DE TEXTE
+   ============================ */
+
+/* Appliquer cette classe dans Scene Builder : Style Class = input */
+.input {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: #DADDE5;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 8 10 8 10;
+    -fx-text-fill: #333333;
+}
+
+/* Quand le champ est focus (cliqué) */
+.input:focused {
+    -fx-border-color: #0078D7;
+    -fx-border-width: 1.5;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Pour les PasswordField aussi, si tu veux un style particulier */
+.password-field {
+    -fx-background-radius: 10;
+}
+
+/* ============================
+   BOUTONS
+   ============================ */
+
+/* Bouton principal type "S'inscrire" / "Se connecter" */
+.btn-primary {
+    -fx-background-color: #0078D7;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 18 10 18;
+    -fx-cursor: hand;
+}
+
+/* Effet hover (quand la souris passe dessus) */
+.btn-primary:hover {
+    -fx-background-color: #0062B5;
+}
+
+/* Effet pressé */
+.btn-primary:pressed {
+    -fx-background-color: #004C8A;
+}
+
+/* Bouton secondaire (Annuler, Retour, etc.) */
+.btn-secondary {
+    -fx-background-color: transparent;
+    -fx-border-color: #0078D7;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-text-fill: #0078D7;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: rgba(0, 120, 215, 0.08);
+}
+
+/* Bouton style danger (Supprimer etc.) */
+.btn-danger {
+    -fx-background-color: #E74C3C;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 8 16;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #C0392B;
+}
+
+/* ============================
+   LIENS / HYPERLINK
+   ============================ */
+
+.hyperlink {
+    -fx-text-fill: #0078D7;
+    -fx-underline: false;
+}
+
+.hyperlink:hover {
+    -fx-underline: true;
+}
+
+/* ============================
+   ESPACEMENTS / DIVERS
+   ============================ */
+
+/* Pour ajouter un peu d'espace autour de certains blocs (facultatif) */
+.section {
+    -fx-padding: 10 0 10 0;
+}
+
+
+/* === CARTES D'ÉVÉNEMENT === */
+
+.card-event {
+    -fx-background-color: white;
+    -fx-padding: 12;
+    -fx-background-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 15, 0, 0, 3);
+    -fx-pref-width: 200;
+}
+
+.event-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+.event-info {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555;
+}
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #0f172a;
+}
+
+/* CARD */
+.card {
+    -fx-background-color: #1e293b;
+    -fx-padding: 20;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 4);
+}
+
+/* TITRE */
+.title {
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* INPUT */
+.input {
+    -fx-background-color: #334155;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+}
+
+/* BOUTON */
+.btn-primary {
+    -fx-background-color: linear-gradient(to right, #3b82f6, #6366f1);
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+}
+
+.btn-primary:hover {
+    -fx-background-color: linear-gradient(to right, #2563eb, #4f46e5);
+}
+
+/* MESSAGE */
+.label-error {
+    -fx-text-fill: #ef4444;
+}
+
+.label-success {
+    -fx-text-fill: #22c55e;
+}
+.card:hover {
+    -fx-translate-y: -4;
+}
+.user-badge {
+    -fx-background-color: #0078D7;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+    -fx-background-radius: 20;
+    -fx-font-size: 12px;
+}
+.badge {
+    -fx-background-color: #27AE60;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+    -fx-background-radius: 20;
+    -fx-font-size: 12px;
+}
+.link-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #dbeafe;
+    -fx-underline: true;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+}
+
+.link-button:hover {
+    -fx-text-fill: white;
+}
+.dashboard-root {
+    -fx-background-color: #f3f4f6;
+}
+
+/* Sidebar */
+
+.sidebar {
+    -fx-background-color: #111827;
+}
+
+.sidebar-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.sidebar-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #9ca3af;
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #d1d5db;
+    -fx-font-size: 15px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #1f2937;
+    -fx-text-fill: white;
+}
+
+.sidebar-button-active {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.logout-button {
+    -fx-background-color: #dc2626;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: #b91c1c;
+}
+
+/* Main content */
+
+.dashboard-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.dashboard-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.dashboard-content {
+    -fx-background-color: #f3f4f6;
+}
+
+.dashboard-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+.dashboard-description {
+    -fx-font-size: 15px;
+    -fx-text-fill: #6b7280;
+}
+
+.admin-email {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+.admin-role {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6b7280;
+}
+
+/* Stats */
+
+.stat-card {
+    -fx-background-color: white;
+    -fx-padding: 22px;
+    -fx-background-radius: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 14, 0, 0, 4);
+    -fx-min-width: 180px;
+}
+
+.stat-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #6b7280;
+}
+
+.stat-value {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+.stat-info {
+    -fx-font-size: 13px;
+    -fx-text-fill: #2563eb;
+}
+
+/* Sections */
+
+.section-card {
+    -fx-background-color: white;
+    -fx-padding: 24px;
+    -fx-background-radius: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 12, 0, 0, 4);
+}
+
+.large-card {
+    -fx-background-color: white;
+    -fx-padding: 24px;
+    -fx-background-radius: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 12, 0, 0, 4);
+}
+
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+}
+
+.activity-item {
+    -fx-font-size: 14px;
+    -fx-text-fill: #374151;
+    -fx-padding: 6px 0;
+}
+
+.security-item {
+    -fx-font-size: 14px;
+    -fx-text-fill: #065f46;
+    -fx-padding: 6px 0;
+}
+
+.paragraph {
+    -fx-font-size: 14px;
+    -fx-text-fill: #374151;
+    -fx-wrap-text: true;
+}
+
+/* Buttons */
+
+.primary-action-button {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 20px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.primary-action-button:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+.secondary-action-button {
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: #111827;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 20px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.secondary-action-button:hover {
+    -fx-background-color: #d1d5db;
+}
+
+.back-button {
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: #111827;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.back-button:hover {
+    -fx-background-color: #d1d5db;
+}

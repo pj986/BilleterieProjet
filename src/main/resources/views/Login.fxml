@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.LoginController"
+            stylesheets="@../styles/app.css">
+
+    <children>
+
+        <VBox alignment="CENTER" spacing="12" layoutX="150" layoutY="80"
+              styleClass="card">
+
+            <Label text="Connexion" styleClass="title" />
+
+            <TextField fx:id="tfEmail" promptText="Adresse email"
+                       styleClass="input"/>
+
+            <PasswordField fx:id="tfPassword"
+                           promptText="Mot de passe"
+                           styleClass="input"/>
+
+            <!-- Label message -->
+            <Label fx:id="lblMessage"
+                   text=""
+                   visible="false"
+                   styleClass="label-error"/>
+
+            <!-- Bouton Connexion -->
+            <Button text="Se connecter"
+                    styleClass="btn-primary"
+                    onAction="#login"/>
+            <Button text="Mot de passe oublié ?"
+                    onAction="#goToForgotPassword"
+                    styleClass="link-button"/>
+
+            <!-- Lien vers inscription -->
+            <Hyperlink text="Créer un compte"
+                       onAction="#goToRegister"/>
+
+
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>

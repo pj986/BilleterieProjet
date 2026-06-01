@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.AdminController"
+            prefWidth="1200"
+            prefHeight="750"
+            styleClass="dashboard-root">
+
+    <!-- SIDEBAR -->
+    <left>
+        <VBox spacing="18" prefWidth="240" styleClass="sidebar">
+            <padding>
+                <Insets top="30" right="20" bottom="30" left="20"/>
+            </padding>
+
+            <Label text="🎫 Tic’n Go"
+                   styleClass="sidebar-title"/>
+
+            <Label text="Back-office billetterie"
+                   styleClass="sidebar-subtitle"/>
+
+            <Separator/>
+
+            <Button text="📊 Dashboard"
+                    onAction="#goToDashboard"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-button-active"/>
+
+            <Button text="🎭 Événements"
+                    onAction="#goToEvents"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-button"/>
+
+            <Button text="🎟 Billets"
+                    onAction="#goToBillets"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-button"/>
+
+            <Button text="👥 Clients"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-button"/>
+
+            <Button text="🕒 Séances"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-button"/>
+
+            <Button text="💶 Tarifs"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-button"/>
+
+            <Pane VBox.vgrow="ALWAYS"/>
+
+            <Button text="🚪 Déconnexion"
+                    onAction="#logout"
+                    maxWidth="Infinity"
+                    styleClass="logout-button"/>
+        </VBox>
+    </left>
+
+    <!-- CONTENU PRINCIPAL -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="dashboard-scroll">
+            <VBox spacing="25" styleClass="dashboard-content">
+                <padding>
+                    <Insets top="30" right="35" bottom="35" left="35"/>
+                </padding>
+
+                <!-- HEADER -->
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <VBox spacing="5">
+                        <Label text="Dashboard administrateur"
+                               styleClass="dashboard-title"/>
+
+                        <Label text="Vue globale de la plateforme de billetterie Tic’n Go"
+                               styleClass="dashboard-description"/>
+                    </VBox>
+
+                    <Pane HBox.hgrow="ALWAYS"/>
+
+                    <VBox alignment="CENTER_RIGHT" spacing="4">
+                        <Label text="👤 admin@admin.com"
+                               styleClass="admin-email"/>
+
+                        <Label text="Connecté en tant qu’administrateur"
+                               styleClass="admin-role"/>
+                    </VBox>
+                </HBox>
+
+                <!-- CARTES STATISTIQUES -->
+                <HBox spacing="20">
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="🎟 Billets vendus"
+                               styleClass="stat-label"/>
+                        <Label fx:id="lblTotalReservations"
+                               text="0"
+                               styleClass="stat-value"/>
+                        <Label text="Billets enregistrés en base"
+                               styleClass="stat-info"/>
+                    </VBox>
+
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="🎭 Événements actifs"
+                               styleClass="stat-label"/>
+                        <Label fx:id="lblTotalEvents"
+                               text="0"
+                               styleClass="stat-value"/>
+                        <Label text="Concerts, spectacles, sport"
+                               styleClass="stat-info"/>
+                    </VBox>
+
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="👥 Clients"
+                               styleClass="stat-label"/>
+                        <Label fx:id="lblTotalClients"
+                               text="0"
+                               styleClass="stat-value"/>
+                        <Label text="Comptes enregistrés"
+                               styleClass="stat-info"/>
+                    </VBox>
+
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label text="💶 Chiffre estimé"
+                               styleClass="stat-label"/>
+                        <Label fx:id="lblChiffreAffaires"
+                               text="0 €"
+                               styleClass="stat-value"/>
+                        <Label text="Selon les billets valides"
+                               styleClass="stat-info"/>
+                    </VBox>
+                </HBox>
+                <VBox spacing="15" styleClass="section-card">
+                    <Label text="Suivi opérationnel des billets"
+                           styleClass="section-title"/>
+
+                    <HBox spacing="20">
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label text="✅ Billets valides"
+                                   styleClass="stat-label"/>
+                            <Label fx:id="lblBilletsValides"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                            <Label text="Billets utilisables"
+                                   styleClass="stat-info"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label text="❌ Billets annulés"
+                                   styleClass="stat-label"/>
+                            <Label fx:id="lblBilletsAnnules"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                            <Label text="Annulations client ou admin"
+                                   styleClass="stat-info"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label text="💸 Billets remboursés"
+                                   styleClass="stat-label"/>
+                            <Label fx:id="lblBilletsRembourses"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                            <Label text="Billets traités en remboursement"
+                                   styleClass="stat-info"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label text="🕒 Séances"
+                                   styleClass="stat-label"/>
+                            <Label fx:id="lblTotalSeances"
+                                   text="0"
+                                   styleClass="stat-value"/>
+                            <Label text="Représentations planifiées"
+                                   styleClass="stat-info"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <Button text="← Retour"
+                        onAction="#goBack"
+                        styleClass="back-button"/>
+
+                <!-- SECTION ACTIONS RAPIDES -->
+                <VBox spacing="15" styleClass="section-card">
+                    <Label text="Actions rapides"
+                           styleClass="section-title"/>
+
+                    <HBox spacing="15">
+                        <Button text="➕ Ajouter un événement"
+                                onAction="#goToEvents"
+                                styleClass="primary-action-button"/>
+
+                        <Button text="🎟 Gérer les billets"
+                                onAction="#goToBillets"
+                                styleClass="primary-action-button"/>
+
+                        <Button text="🔍 Rechercher une réservation"
+                                styleClass="secondary-action-button"/>
+
+                        <Button text="📄 Export / impression"
+                                styleClass="secondary-action-button"/>
+                    </HBox>
+                </VBox>
+
+                <!-- GRILLE INFOS -->
+                <HBox spacing="20">
+
+                    <!-- ACTIVITÉ RÉCENTE -->
+                    <VBox spacing="12" styleClass="large-card" HBox.hgrow="ALWAYS">
+                        <Label text="Activité récente"
+                               styleClass="section-title"/>
+
+                        <Label text="• Billet TNG-001 créé pour la séance du Roi Lion"
+                               styleClass="activity-item"/>
+
+                        <Label text="• Billet TNG-002 annulé après demande client"
+                               styleClass="activity-item"/>
+
+                        <Label text="• Nouvelle séance ajoutée pour un concert à Paris"
+                               styleClass="activity-item"/>
+
+                        <Label text="• Tarif réduit étudiant activé"
+                               styleClass="activity-item"/>
+
+                        <Label text="• Client ajouté dans la base de données"
+                               styleClass="activity-item"/>
+                    </VBox>
+
+                    <!-- SÉCURITÉ -->
+                    <VBox spacing="12" styleClass="large-card" HBox.hgrow="ALWAYS">
+                        <Label text="Sécurité et conformité"
+                               styleClass="section-title"/>
+
+                        <Label text="✅ Authentification administrateur"
+                               styleClass="security-item"/>
+
+                        <Label text="✅ Mots de passe hashés avec BCrypt"
+                               styleClass="security-item"/>
+
+                        <Label text="✅ Réinitialisation par code temporaire"
+                               styleClass="security-item"/>
+
+                        <Label text="✅ Données clients limitées au nécessaire"
+                               styleClass="security-item"/>
+
+                        <Label text="✅ Requêtes SQL préparées avec PreparedStatement"
+                               styleClass="security-item"/>
+                    </VBox>
+                </HBox>
+
+                <!-- OBJECTIFS DU BACK-OFFICE -->
+                <VBox spacing="12" styleClass="section-card">
+                    <Label text="Objectifs du back-office"
+                           styleClass="section-title"/>
+
+                    <Label text="Cette interface permet à l’administrateur de gérer l’ensemble de la billetterie : événements, séances, clients, billets, statuts et tarifs."
+                           styleClass="paragraph"/>
+
+                    <Label text="Chaque billet possède un numéro unique, un client associé, une séance, un tarif, un statut et peut être validé, annulé ou remboursé."
+                           styleClass="paragraph"/>
+
+                    <Label text="Cette organisation respecte le cahier des charges du projet Tic’n Go et prépare l’application à une évolution future : export PDF, QR code et statistiques avancées."
+                           styleClass="paragraph"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

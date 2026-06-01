@@ -1,0 +1,25 @@
+# Maven
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+
+# Environnement / secrets
+.env
+application.properties
+config.properties
+
+# Archives
+*.zip
+*.rar
