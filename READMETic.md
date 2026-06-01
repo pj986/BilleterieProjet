@@ -67,6 +67,7 @@ Importer le projet dans IntelliJ IDEA
 Configurer la connexion MySQL dans Database.java
 Importer le script SQL de la base de données
 Lancer l'application avec Maven ou IntelliJ
+Un script `database.sql` est fourni pour recréer la base de données MySQL avec des données de test.
 Auteur
 
 Projet réalisé par Pierre-Jordan Tchokote dans le cadre du BTS SIO option SLAM.
