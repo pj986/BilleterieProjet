@@ -61,6 +61,10 @@
                     onAction="#logout"
                     maxWidth="Infinity"
                     styleClass="logout-button"/>
+            <Button text="🛡 Administrateurs"
+                    onAction="#goToAdministrateurs"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-button"/>
         </VBox>
     </left>
 

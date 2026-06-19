@@ -43,6 +43,8 @@ public class LoginController {
 
         if (user != null) {
 
+
+
             Session.login(user.getEmail(), user.getRole());
 
             System.out.println("[AUTH] Connexion réussie pour : " + user.getEmail());

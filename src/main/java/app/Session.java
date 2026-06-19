@@ -3,6 +3,10 @@ package app;
 public class Session {
 
     private static String email;
+    private Session() {
+
+    }
+
     private static String role;
     private static boolean loggedIn = false;
 

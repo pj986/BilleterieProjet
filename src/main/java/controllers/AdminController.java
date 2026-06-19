@@ -197,4 +197,11 @@ public class AdminController {
     private void goToTarifs(ActionEvent event) {
         SceneManager.switchScene(event, "/views/Tarifs.fxml");
     }
+    @FXML
+    private void goToAdministrateurs(ActionEvent event) {
+        SceneManager.switchScene(
+                event,
+                "/views/Administrateurs.fxml"
+        );
+    }
 }
