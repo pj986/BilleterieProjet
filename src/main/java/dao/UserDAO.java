@@ -1,8 +1,8 @@
 package dao;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import database.Database;
 import models.User;
-import at.favre.lib.crypto.bcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,29 +10,152 @@ import java.sql.ResultSet;
 
 public class UserDAO {
 
-    // Méthode de connexion : vérification email et mot de passe
+    /**
+     * Authentifie d'abord un administrateur,
+     * puis un utilisateur client.
+     */
     public static User login(String email, String password) {
 
-        String sql = "SELECT * FROM utilisateur WHERE email = ?";
+        if (email == null || password == null
+                || email.isBlank() || password.isBlank()) {
 
-        try (Connection conn = Database.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            System.out.println("[AUTH] Email ou mot de passe vide.");
+            return null;
+        }
 
-            // Normalisation de l'email (minuscule et trim)
-            ps.setString(1, email.toLowerCase().trim());
+        String normalizedEmail = email.trim().toLowerCase();
 
-            ResultSet rs = ps.executeQuery();
+        // Recherche prioritaire dans la table administrateur
+        User admin = loginAdmin(normalizedEmail, password);
 
-            if (rs.next()) {
+        if (admin != null) {
+            return admin;
+        }
 
-                // Récupérer le mot de passe haché
-                String hashedPassword = rs.getString("mot_de_passe");
+        // Si ce n'est pas un admin, recherche dans utilisateur
+        return loginClient(normalizedEmail, password);
+    }
 
-                // Vérifier si le mot de passe est correct avec BCrypt
-                BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+    /**
+     * Authentification d'un administrateur.
+     */
+    private static User loginAdmin(String email, String password) {
 
-                // Si le mot de passe est correct, on retourne un objet User
-                if (result.verified) {
+        String sql = """
+                SELECT id_admin, email, mot_de_passe
+                FROM administrateur
+                WHERE LOWER(email) = ?
+                """;
+
+        try (Connection conn = Database.getConnection()) {
+
+            if (conn == null) {
+                System.out.println("[AUTH] Connexion MySQL impossible.");
+                return null;
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, email);
+
+                try (ResultSet rs = ps.executeQuery()) {
+
+                    if (!rs.next()) {
+                        System.out.println("[AUTH] Administrateur introuvable.");
+                        return null;
+                    }
+
+                    String hash = rs.getString("mot_de_passe");
+
+                    if (!isValidBcryptHash(hash)) {
+                        System.out.println(
+                                "[AUTH] Mot de passe administrateur non hashé avec BCrypt."
+                        );
+                        return null;
+                    }
+
+                    BCrypt.Result result = BCrypt.verifyer()
+                            .verify(password.toCharArray(), hash);
+
+                    if (!result.verified) {
+                        System.out.println(
+                                "[AUTH] Mot de passe administrateur incorrect."
+                        );
+                        return null;
+                    }
+
+                    System.out.println(
+                            "[AUTH] Connexion administrateur réussie."
+                    );
+
+                    return new User(
+                            rs.getInt("id_admin"),
+                            rs.getString("email"),
+                            "admin"
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(
+                    "[AUTH] Erreur pendant l'authentification administrateur."
+            );
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Authentification d'un utilisateur client.
+     */
+    private static User loginClient(String email, String password) {
+
+        String sql = """
+                SELECT id, email, mot_de_passe, role
+                FROM utilisateur
+                WHERE LOWER(email) = ?
+                """;
+
+        try (Connection conn = Database.getConnection()) {
+
+            if (conn == null) {
+                return null;
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, email);
+
+                try (ResultSet rs = ps.executeQuery()) {
+
+                    if (!rs.next()) {
+                        System.out.println("[AUTH] Utilisateur introuvable.");
+                        return null;
+                    }
+
+                    String hash = rs.getString("mot_de_passe");
+
+                    if (!isValidBcryptHash(hash)) {
+                        System.out.println(
+                                "[AUTH] Mot de passe utilisateur non hashé avec BCrypt."
+                        );
+                        return null;
+                    }
+
+                    BCrypt.Result result = BCrypt.verifyer()
+                            .verify(password.toCharArray(), hash);
+
+                    if (!result.verified) {
+                        System.out.println(
+                                "[AUTH] Mot de passe utilisateur incorrect."
+                        );
+                        return null;
+                    }
+
+                    System.out.println(
+                            "[AUTH] Connexion utilisateur réussie."
+                    );
+
                     return new User(
                             rs.getInt("id"),
                             rs.getString("email"),
@@ -42,32 +165,81 @@ public class UserDAO {
             }
 
         } catch (Exception e) {
-            // Exception lors de la connexion, enregistrement dans un log (ou renvoi d'une exception spécifique)
+            System.out.println(
+                    "[AUTH] Erreur pendant l'authentification utilisateur."
+            );
             e.printStackTrace();
+            return null;
         }
-
-        // Retourner null si l'utilisateur n'existe pas ou le mot de passe est incorrect
-        return null;
     }
 
-    // Méthode pour enregistrer un nouvel utilisateur
-    public static boolean createUser(String email, String hashedPassword) {
+    /**
+     * Crée un compte utilisateur client.
+     * Le mot de passe reçu doit déjà être hashé par BCrypt.
+     */
+    public static boolean createUser(
+            String email,
+            String hashedPassword
+    ) {
 
-        String sql = "INSERT INTO utilisateur (email, mot_de_passe, role) VALUES (?, ?, ?)";
+        if (email == null || email.isBlank()
+                || !isValidBcryptHash(hashedPassword)) {
 
-        try (Connection conn = Database.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            System.out.println(
+                    "[AUTH] Informations d'inscription invalides."
+            );
+            return false;
+        }
 
-            ps.setString(1, email.toLowerCase().trim()); // Enlever les espaces et normaliser en minuscule
-            ps.setString(2, hashedPassword);
-            ps.setString(3, "client"); // Par défaut, le rôle d'un utilisateur est "client"
+        String sql = """
+                INSERT INTO utilisateur
+                (email, mot_de_passe, role)
+                VALUES (?, ?, ?)
+                """;
 
-            int rows = ps.executeUpdate();
-            return rows > 0; // Si l'insertion est réussie, on retourne true
+        try (Connection conn = Database.getConnection()) {
+
+            if (conn == null) {
+                System.out.println("[AUTH] Connexion MySQL impossible.");
+                return false;
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, email.trim().toLowerCase());
+                ps.setString(2, hashedPassword);
+                ps.setString(3, "client");
+
+                boolean success = ps.executeUpdate() > 0;
+
+                if (success) {
+                    System.out.println(
+                            "[AUTH] Compte utilisateur créé avec succès."
+                    );
+                }
+
+                return success;
+            }
 
         } catch (Exception e) {
-            e.printStackTrace(); // Gestion d'erreur
-            return false; // Retourner false si une erreur se produit
+            System.out.println(
+                    "[AUTH] Erreur pendant la création du compte."
+            );
+            e.printStackTrace();
+            return false;
         }
+    }
+
+    /**
+     * Vérifie rapidement le format d'un hash BCrypt.
+     */
+    private static boolean isValidBcryptHash(String hash) {
+        return hash != null
+                && hash.length() == 60
+                && (
+                hash.startsWith("$2a$")
+                        || hash.startsWith("$2b$")
+                        || hash.startsWith("$2y$")
+        );
     }
 }

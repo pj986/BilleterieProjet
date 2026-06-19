@@ -183,4 +183,18 @@ public class AdminController {
     @FXML private Label lblBilletsAnnules;
     @FXML private Label lblBilletsRembourses;
     @FXML private Label lblTotalSeances;
+    @FXML
+    private void goToClients(ActionEvent event) {
+        SceneManager.switchScene(event, "/views/Clients.fxml");
+    }
+
+    @FXML
+    private void goToSeances(ActionEvent event) {
+        SceneManager.switchScene(event, "/views/Seances.fxml");
+    }
+
+    @FXML
+    private void goToTarifs(ActionEvent event) {
+        SceneManager.switchScene(event, "/views/Tarifs.fxml");
+    }
 }

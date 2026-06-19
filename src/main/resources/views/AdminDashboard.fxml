@@ -41,14 +41,17 @@
                     styleClass="sidebar-button"/>
 
             <Button text="👥 Clients"
+                    onAction="#goToClients"
                     maxWidth="Infinity"
                     styleClass="sidebar-button"/>
 
             <Button text="🕒 Séances"
+                    onAction="#goToSeances"
                     maxWidth="Infinity"
                     styleClass="sidebar-button"/>
 
             <Button text="💶 Tarifs"
+                    onAction="#goToTarifs"
                     maxWidth="Infinity"
                     styleClass="sidebar-button"/>
 
