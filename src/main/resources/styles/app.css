@@ -172,18 +172,19 @@
 /* Bouton secondaire (Annuler, Retour, etc.) */
 .btn-secondary {
     -fx-background-color: transparent;
-    -fx-border-color: #0078D7;
-    -fx-border-radius: 10;
-    -fx-border-width: 1;
-    -fx-text-fill: #0078D7;
-    -fx-padding: 8 16;
+    -fx-text-fill: #9bd0ff;
+    -fx-font-weight: bold;
+    -fx-padding: 12 22 12 22;
+    -fx-border-color: #0ea5e9;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
     -fx-cursor: hand;
 }
 
-.btn-secondary:hover {
-    -fx-background-color: rgba(0, 120, 215, 0.08);
-}
 
+.btn-secondary:hover {
+    -fx-background-color: rgba(14, 165, 233, 0.08);
+}
 /* Bouton style danger (Supprimer etc.) */
 .btn-danger {
     -fx-background-color: #E74C3C;
@@ -240,8 +241,7 @@
     -fx-text-fill: #555;
 }
 .root {
-    -fx-font-family: "Segoe UI", sans-serif;
-    -fx-background-color: #0f172a;
+    -fx-background-color: linear-gradient(to bottom right, #07152f, #091d46);
 }
 
 /* CARD */
@@ -272,12 +272,15 @@
 .btn-primary {
     -fx-background-color: linear-gradient(to right, #3b82f6, #6366f1);
     -fx-text-fill: white;
-    -fx-background-radius: 10;
-    -fx-padding: 10 20;
+    -fx-font-weight: bold;
+    -fx-padding: 12 22 12 22;
+    -fx-background-radius: 12;
+    -fx-cursor: hand;
 }
 
+
 .btn-primary:hover {
-    -fx-background-color: linear-gradient(to right, #2563eb, #4f46e5);
+    -fx-opacity: 0.92;
 }
 
 /* MESSAGE */
@@ -292,18 +295,18 @@
     -fx-translate-y: -4;
 }
 .user-badge {
-    -fx-background-color: #0078D7;
+    -fx-background-color: linear-gradient(to right, #0ea5e9, #2563eb);
     -fx-text-fill: white;
-    -fx-padding: 6 12;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
     -fx-background-radius: 20;
-    -fx-font-size: 12px;
 }
 .badge {
-    -fx-background-color: #27AE60;
+    -fx-background-color: linear-gradient(to right, #22c55e, #16a34a);
     -fx-text-fill: white;
-    -fx-padding: 6 12;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
     -fx-background-radius: 20;
-    -fx-font-size: 12px;
 }
 .link-button {
     -fx-background-color: transparent;
@@ -518,4 +521,77 @@
 
 .back-button:hover {
     -fx-background-color: #d1d5db;
+}
+.admin-badge {
+    -fx-background-color: linear-gradient(to right, #ffb347, #ffcc33);
+    -fx-text-fill: #1c1c1c;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+.user-badge {
+    -fx-background-color: linear-gradient(to right, #0ea5e9, #2563eb);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 20;
+}
+.badge {
+    -fx-background-color: linear-gradient(to right, #22c55e, #16a34a);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 20;
+}
+.status-text {
+    -fx-text-fill: #8fd3ff;
+    -fx-font-size: 13px;
+}
+.admin-card {
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-background-radius: 22;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 18, 0.2, 0, 6);
+    -fx-border-color: rgba(255, 204, 51, 0.35);
+    -fx-border-width: 1.2;
+    -fx-border-radius: 22;
+}
+.mini-value {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+.mini-title {
+    -fx-font-size: 13px;
+    -fx-text-fill: #9fb3d9;
+}
+.card-text {
+    -fx-font-size: 13px;
+    -fx-text-fill: #c7d5f2;
+}
+.mini-value {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+.home-header {
+    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-width: 0 0 1 0;
+}
+
+.home-content {
+    -fx-background-color: transparent;
+}
+
+.main-title {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.main-subtitle {
+    -fx-font-size: 15px;
+    -fx-text-fill: #b9c6e3;
 }

@@ -39,13 +39,13 @@
                 <TextField fx:id="searchField"
                            promptText="🔍 Rechercher un événement..."
                            prefWidth="350"
-                           styleClass="search-field"/>
+                           styleClass="search-field"
+                           onKeyReleased="#handleSearch"/>
 
                 <Button text="Rechercher"
                         onAction="#handleSearch"
                         styleClass="primary-action-button"/>
             </HBox>
-
             <!-- TRI -->
             <HBox spacing="10">
                 <Button text="Date ↑" onAction="#sortByDateAsc" styleClass="secondary-action-button"/>

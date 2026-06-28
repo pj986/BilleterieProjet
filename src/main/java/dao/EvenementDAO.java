@@ -35,7 +35,18 @@ public class EvenementDAO {
 
         List<Evenement> events = new ArrayList<>();
 
-        String sql = "SELECT * FROM evenement";
+        String sql = """
+            SELECT
+                id,
+                titre,
+                categorie,
+                date_evt,
+                lieu,
+                prix,
+                image
+            FROM evenement
+            ORDER BY date_evt ASC
+            """;
 
         try (Connection conn = Database.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -44,13 +55,16 @@ public class EvenementDAO {
             while (rs.next()) {
 
                 Evenement e = new Evenement(
+                        rs.getInt("id"),
                         rs.getString("titre"),
                         rs.getString("categorie"),
                         rs.getString("date_evt"),
                         rs.getString("lieu"),
                         rs.getDouble("prix"),
-                        rs.getString("image") // 🔥 important
+                        rs.getString("image")
                 );
+
+                System.out.println("[EVENT DAO] " + e.getTitre() + " | ID = " + e.getId());
 
                 events.add(e);
             }

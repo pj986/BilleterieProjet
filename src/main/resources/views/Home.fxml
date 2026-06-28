@@ -4,74 +4,166 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171"
+<BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.HomeController"
             styleClass="root">
 
-    <children>
+    <!-- HEADER -->
+    <top>
+        <VBox spacing="18" styleClass="home-header">
+            <padding>
+                <Insets top="25" right="30" bottom="20" left="30"/>
+            </padding>
 
-        <VBox spacing="25"
-              alignment="TOP_CENTER"
-              AnchorPane.topAnchor="0"
-              AnchorPane.bottomAnchor="0"
-              AnchorPane.leftAnchor="0"
-              AnchorPane.rightAnchor="0"
-              style="-fx-padding: 40;">
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="6">
+                    <Label text="🎟️ Tic’n Go"
+                           styleClass="main-title"/>
 
-            <!-- HEADER -->
-            <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="section">
+                    <Label fx:id="lblWelcome"
+                           text="Bienvenue sur la plateforme"
+                           styleClass="main-subtitle"/>
+                </VBox>
 
-                <Label fx:id="lblUser" styleClass="user-badge"/>
-                <Label fx:id="lblReservations" styleClass="badge"/>
+                <Region HBox.hgrow="ALWAYS"/>
 
-                <Button fx:id="btnLogout"
-                        text="🚪 Déconnexion"
-                        styleClass="btn-secondary"
-                        onAction="#logout"/>
+                <VBox alignment="CENTER_RIGHT" spacing="8">
+                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Label fx:id="lblRole"
+                               text="ADMINISTRATEUR"
+                               styleClass="admin-badge"/>
 
+                        <Label fx:id="lblUser"
+                               text="👤 admin@ticngo.fr"
+                               styleClass="user-badge"/>
+
+                        <Label fx:id="lblReservations"
+                               text="🎟️ 0 réservations"
+                               styleClass="badge"/>
+
+                        <Button fx:id="btnLogout"
+                                text="🚪 Déconnexion"
+                                styleClass="btn-secondary"
+                                onAction="#logout"/>
+                    </HBox>
+
+                    <Label fx:id="lblStatus"
+                           text="Compte connecté et authentifié"
+                           styleClass="status-text"/>
+                </VBox>
             </HBox>
-            <!-- TITRE -->
-            <Label text="🎟️ Billetterie"
-                   styleClass="title"/>
-
-            <!-- ACTIONS PRINCIPALES -->
-            <HBox spacing="20" alignment="CENTER">
-
-                <!-- EVENTS -->
-                <VBox spacing="10" alignment="CENTER" styleClass="card">
-                    <Label text="🎟️ Événements" styleClass="subtitle"/>
-                    <Button fx:id="btnEvents"
-                            text="Voir"
-                            styleClass="btn-primary"
-                            onAction="#goToEvents"/>
-                </VBox>
-
-                <!-- LOGIN -->
-                <VBox spacing="10" alignment="CENTER" styleClass="card">
-                    <Label text="🔑 Compte" styleClass="subtitle"/>
-                    <Button fx:id="btnLogin"
-                            text="Connexion"
-                            styleClass="btn-secondary"
-                            onAction="#goToLogin"/>
-                    <Button fx:id="btnRegister"
-                            text="Inscription"
-                            styleClass="btn-secondary"
-                            onAction="#goToRegister"/>
-                </VBox>
-
-                <!-- ADMIN -->
-                <VBox spacing="10" alignment="CENTER" styleClass="card">
-                    <Label text="📊 Admin" styleClass="subtitle"/>
-                    <Button fx:id="btnAdmin"
-                            text="Dashboard"
-                            styleClass="btn-primary"
-                            onAction="#goToAdmin"/>
-                </VBox>
-
-            </HBox>
-
         </VBox>
+    </top>
 
-    </children>
-</AnchorPane>
+    <!-- CONTENU -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="dashboard-scroll">
+            <content>
+                <VBox spacing="25" styleClass="home-content">
+                    <padding>
+                        <Insets top="25" right="30" bottom="30" left="30"/>
+                    </padding>
+
+                    <!-- HERO ADMIN -->
+                    <HBox spacing="20">
+                        <VBox spacing="12" styleClass="hero-card" HBox.hgrow="ALWAYS">
+                            <Label text="Console d’administration"
+                                   styleClass="hero-title"/>
+
+                            <Label text="Pilotez les événements, les réservations, les clients et le back-office de billetterie depuis un espace centralisé."
+                                   wrapText="true"
+                                   styleClass="hero-text"/>
+
+                            <HBox spacing="12">
+                                <Button text="📊 Ouvrir le dashboard"
+                                        styleClass="btn-primary"
+                                        onAction="#goToAdmin"/>
+
+                                <Button text="🎭 Voir les événements"
+                                        styleClass="btn-secondary"
+                                        onAction="#goToEvents"/>
+                            </HBox>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="admin-card" prefWidth="320">
+                            <Label text="🔐 Compte administrateur"
+                                   styleClass="card-title"/>
+
+                            <Label text="Accès vérifié"
+                                   styleClass="verified-text"/>
+
+                            <Label fx:id="lblAdminDetails"
+                                   text="Compte admin principal connecté"
+                                   wrapText="true"
+                                   styleClass="card-text"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- ACTIONS PRINCIPALES -->
+                    <Label text="Actions principales"
+                           styleClass="section-title"/>
+
+                    <HBox spacing="20">
+                        <VBox spacing="12" alignment="CENTER_LEFT" styleClass="action-card" HBox.hgrow="ALWAYS">
+                            <Label text="🎭 Gestion des événements" styleClass="card-title"/>
+                            <Label text="Consulter les événements disponibles et gérer les réservations liées."
+                                   wrapText="true"
+                                   styleClass="card-text"/>
+                            <Button text="Voir les événements"
+                                    styleClass="btn-primary"
+                                    onAction="#goToEvents"/>
+                        </VBox>
+
+                        <VBox spacing="12" alignment="CENTER_LEFT" styleClass="action-card" HBox.hgrow="ALWAYS">
+                            <Label text="📊 Dashboard administrateur" styleClass="card-title"/>
+                            <Label text="Accéder au tableau de bord et superviser l’activité globale."
+                                   wrapText="true"
+                                   styleClass="card-text"/>
+                            <Button text="Accéder au dashboard"
+                                    styleClass="btn-primary"
+                                    onAction="#goToAdmin"/>
+                        </VBox>
+
+                        <VBox spacing="12" alignment="CENTER_LEFT" styleClass="action-card" HBox.hgrow="ALWAYS">
+                            <Label text="👤 Compte connecté" styleClass="card-title"/>
+                            <Label text="Compte utilisé pour piloter l’application en mode administrateur."
+                                   wrapText="true"
+                                   styleClass="card-text"/>
+                            <Button text="Connexion"
+                                    fx:id="btnLogin"
+                                    styleClass="btn-secondary"
+                                    onAction="#goToLogin"/>
+                            <Button text="Inscription"
+                                    fx:id="btnRegister"
+                                    styleClass="btn-secondary"
+                                    onAction="#goToRegister"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- INFOS RAPIDES -->
+                    <Label text="État de la session"
+                           styleClass="section-title"/>
+
+                    <HBox spacing="20">
+                        <VBox spacing="10" styleClass="info-card" HBox.hgrow="ALWAYS">
+                            <Label text="🛡️ Rôle" styleClass="mini-title"/>
+                            <Label text="Administrateur" fx:id="lblMiniRole" styleClass="mini-value"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="info-card" HBox.hgrow="ALWAYS">
+                            <Label text="📧 Session" styleClass="mini-title"/>
+                            <Label text="Email connecté" fx:id="lblMiniEmail" styleClass="mini-value"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="info-card" HBox.hgrow="ALWAYS">
+                            <Label text="🎟️ Réservations" styleClass="mini-title"/>
+                            <Label text="0" fx:id="lblMiniReservations" styleClass="mini-value"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.TarifsController"
+            prefWidth="1200"
+            prefHeight="750"
+            styleClass="page">
+
+    <top>
+        <VBox spacing="16" styleClass="events-header">
+
+            <padding>
+                <Insets top="25"
+                        right="30"
+                        bottom="25"
+                        left="30"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="18">
+
+                <Button text="← Retour"
+                        onAction="#goBack"
+                        styleClass="back-button"/>
+
+                <VBox spacing="5">
+                    <Label text="Gestion des tarifs"
+                           styleClass="page-title"/>
+
+                    <Label text="Configurez les réductions et promotions appliquées aux billets."
+                           styleClass="page-subtitle"/>
+                </VBox>
+
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+
+                <TextField fx:id="searchField"
+                           promptText="Rechercher un tarif..."
+                           prefWidth="420"
+                           onKeyReleased="#handleSearch"
+                           styleClass="search-field"/>
+
+                <Button text="Réinitialiser"
+                        onAction="#resetSearch"
+                        styleClass="secondary-action-button"/>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Button text="+ Ajouter un tarif"
+                        onAction="#openAddForm"
+                        styleClass="primary-action-button"/>
+
+            </HBox>
+
+            <HBox spacing="20">
+                <Label fx:id="lblCount"
+                       text="0 tarif(s)"
+                       styleClass="stat-info"/>
+
+                <Label fx:id="lblActiveCount"
+                       text="0 tarif(s) actif(s)"
+                       styleClass="stat-info"/>
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="18" styleClass="dashboard-content">
+
+            <padding>
+                <Insets top="25"
+                        right="30"
+                        bottom="30"
+                        left="30"/>
+            </padding>
+
+            <TableView fx:id="tarifsTable"
+                       VBox.vgrow="ALWAYS"
+                       columnResizePolicy="CONSTRAINED_RESIZE_POLICY"
+                       styleClass="clients-table">
+
+                <columns>
+                    <TableColumn fx:id="idColumn"
+                                 text="ID"
+                                 prefWidth="60"/>
+
+                    <TableColumn fx:id="libelleColumn"
+                                 text="Libellé"
+                                 prefWidth="180"/>
+
+                    <TableColumn fx:id="typeColumn"
+                                 text="Type"
+                                 prefWidth="120"/>
+
+                    <TableColumn fx:id="valeurColumn"
+                                 text="Valeur"
+                                 prefWidth="100"/>
+
+                    <TableColumn fx:id="statutColumn"
+                                 text="Statut"
+                                 prefWidth="100"/>
+
+                    <TableColumn fx:id="dateDebutColumn"
+                                 text="Début"
+                                 prefWidth="110"/>
+
+                    <TableColumn fx:id="dateFinColumn"
+                                 text="Fin"
+                                 prefWidth="110"/>
+
+                    <TableColumn fx:id="descriptionColumn"
+                                 text="Description"
+                                 prefWidth="300"/>
+                </columns>
+
+                <placeholder>
+                    <Label text="Aucun tarif trouvé."
+                           styleClass="page-subtitle"/>
+                </placeholder>
+
+            </TableView>
+
+            <HBox alignment="CENTER_RIGHT" spacing="12">
+
+                <Button text="Actualiser"
+                        onAction="#refreshTarifs"
+                        styleClass="secondary-action-button"/>
+
+                <Button text="Activer / Désactiver"
+                        onAction="#toggleActive"
+                        styleClass="secondary-action-button"/>
+
+                <Button text="Modifier"
+                        onAction="#handleEdit"
+                        styleClass="primary-action-button"/>
+
+                <Button text="Supprimer"
+                        onAction="#handleDelete"
+                        styleClass="logout-button"/>
+
+            </HBox>
+
+            <Label fx:id="messageLabel"
+                   text=""
+                   wrapText="true"/>
+
+        </VBox>
+    </center>
+
+</BorderPane>

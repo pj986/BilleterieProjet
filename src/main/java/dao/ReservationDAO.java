@@ -10,45 +10,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationDAO {
-    public static void create(String email, int eventId) {
+    public static boolean create(String email, int evenementId) {
 
-        String sql = "INSERT INTO reservation (user_email, evenement_id) VALUES (?, ?)";
+        String sql = """
+            INSERT INTO reservation
+            (user_email, evenement_id)
+            VALUES (?, ?)
+            """;
 
-        try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Database.getConnection()) {
 
-            stmt.setString(1, email);
-            stmt.setInt(2, eventId);
+            if (conn == null) {
+                return false;
+            }
 
-            stmt.executeUpdate();
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            System.out.println("Réservation enregistrée !");
+                ps.setString(1, email.trim().toLowerCase());
+                ps.setInt(2, evenementId);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public static boolean exists(String email, int eventId) {
-
-        String sql = "SELECT COUNT(*) FROM reservation WHERE user_email = ? AND evenement_id = ?";
-
-        try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, email);
-            stmt.setInt(2, eventId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
+                return ps.executeUpdate() > 0;
             }
 
         } catch (Exception e) {
+            System.err.println(
+                    "[RESERVATION DAO] Erreur lors de la création."
+            );
             e.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean exists(String email, int evenementId) {
+
+        if (email == null || email.isBlank()) {
+            return false;
         }
 
-        return false;
+        String sql = """
+            SELECT COUNT(*) AS total
+            FROM reservation
+            WHERE LOWER(user_email) = LOWER(?)
+              AND evenement_id = ?
+            """;
+
+        try (Connection conn = Database.getConnection()) {
+
+            if (conn == null) {
+                return false;
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, email.trim());
+                ps.setInt(2, evenementId);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    return rs.next() && rs.getInt("total") > 0;
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("[RESERVATION DAO] Erreur vérification réservation.");
+            e.printStackTrace();
+            return false;
+        }
     }
     public static List<Evenement> getByUser(String email) {
 
@@ -93,20 +118,38 @@ public class ReservationDAO {
 
     public static int countByEmail(String email) {
 
-        String sql = "SELECT COUNT(*) FROM reservation WHERE email = ?";
+        if (email == null || email.isBlank()) {
+            return 0;
+        }
 
-        try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        String sql = """
+            SELECT COUNT(*) AS total
+            FROM reservation
+            WHERE LOWER(user_email) = LOWER(?)
+            """;
 
-            stmt.setString(1, email);
+        try (Connection conn = Database.getConnection()) {
 
-            ResultSet rs = stmt.executeQuery();
+            if (conn == null) {
+                return 0;
+            }
 
-            if (rs.next()) {
-                return rs.getInt(1);
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, email.trim());
+
+                try (ResultSet rs = ps.executeQuery()) {
+
+                    if (rs.next()) {
+                        return rs.getInt("total");
+                    }
+                }
             }
 
         } catch (Exception e) {
+            System.err.println(
+                    "[RESERVATION DAO] Erreur lors du comptage pour : " + email
+            );
             e.printStackTrace();
         }
 

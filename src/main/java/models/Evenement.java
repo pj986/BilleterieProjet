@@ -10,7 +10,18 @@ public class Evenement {
     private double prix;
     private String image;
 
-    // Constructeur
+    // Constructeur complet utilisé depuis MySQL
+    public Evenement(int id, String titre, String categorie, String date, String lieu, double prix, String image) {
+        this.id = id;
+        this.titre = titre;
+        this.categorie = categorie;
+        this.date = date;
+        this.lieu = lieu;
+        this.prix = prix;
+        this.image = image;
+    }
+
+    // Constructeur utilisé pour créer un événement avant insertion
     public Evenement(String titre, String categorie, String date, String lieu, double prix, String image) {
         this.titre = titre;
         this.categorie = categorie;
@@ -20,14 +31,35 @@ public class Evenement {
         this.image = image;
     }
 
-    // Getters
-    public int getId(){return id;}
-    public String getTitre() { return titre; }
-    public String getCategorie() { return categorie; }
-    public String getDate() { return date; }
-    public String getLieu() { return lieu; }
-    public double getPrix() { return prix; }
+    public int getId() {
+        return id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getLieu() {
+        return lieu;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
     public String getImage() {
         return image;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

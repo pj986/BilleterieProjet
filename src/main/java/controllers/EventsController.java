@@ -30,11 +30,13 @@ public class EventsController {
     private Label lblCount;
 
     private List<Evenement> allEvents;
+    private List<Evenement> currentEvents;
 
     @FXML
     public void initialize() {
         allEvents = EvenementDAO.getAll();
-        displayEvents(allEvents);
+        currentEvents = allEvents;
+        displayEvents(currentEvents);
     }
 
     private void displayEvents(List<Evenement> events) {
@@ -106,7 +108,8 @@ public class EventsController {
 
     @FXML
     private void filterAll() {
-        displayEvents(allEvents);
+        currentEvents = allEvents;
+        displayEvents(currentEvents);
     }
 
     @FXML
@@ -130,48 +133,49 @@ public class EventsController {
     }
 
     private void filterByCategory(String category) {
-        List<Evenement> filtered = allEvents.stream()
+        currentEvents = allEvents.stream()
                 .filter(e -> e.getCategorie() != null &&
                         e.getCategorie().toLowerCase().contains(category.toLowerCase()))
                 .collect(Collectors.toList());
 
-        displayEvents(filtered);
+        displayEvents(currentEvents);
     }
 
     @FXML
     private void sortByDateAsc() {
-        List<Evenement> sorted = allEvents.stream()
+        currentEvents = currentEvents.stream()
                 .sorted(Comparator.comparing(Evenement::getDate))
                 .collect(Collectors.toList());
 
-        displayEvents(sorted);
+        displayEvents(currentEvents);
     }
 
     @FXML
     private void sortByDateDesc() {
-        List<Evenement> sorted = allEvents.stream()
+        currentEvents = currentEvents.stream()
                 .sorted(Comparator.comparing(Evenement::getDate).reversed())
                 .collect(Collectors.toList());
 
-        displayEvents(sorted);
+        displayEvents(currentEvents);
     }
 
     @FXML
     private void sortByPriceAsc() {
-        List<Evenement> sorted = allEvents.stream()
+        currentEvents = currentEvents.stream()
                 .sorted(Comparator.comparingDouble(Evenement::getPrix))
                 .collect(Collectors.toList());
 
-        displayEvents(sorted);
+        displayEvents(currentEvents);
     }
+
 
     @FXML
     private void sortByPriceDesc() {
-        List<Evenement> sorted = allEvents.stream()
+        currentEvents = currentEvents.stream()
                 .sorted(Comparator.comparingDouble(Evenement::getPrix).reversed())
                 .collect(Collectors.toList());
 
-        displayEvents(sorted);
+        displayEvents(currentEvents);
     }
 
     @FXML
@@ -179,19 +183,21 @@ public class EventsController {
         String keyword = searchField.getText().trim().toLowerCase();
 
         if (keyword.isEmpty()) {
-            displayEvents(allEvents);
+            currentEvents = allEvents;
+            displayEvents(currentEvents);
             return;
         }
 
-        List<Evenement> filtered = allEvents.stream()
+        currentEvents = allEvents.stream()
                 .filter(e ->
                         safe(e.getTitre()).contains(keyword)
                                 || safe(e.getCategorie()).contains(keyword)
                                 || safe(e.getLieu()).contains(keyword)
+                                || safe(e.getDate()).contains(keyword)
                 )
                 .collect(Collectors.toList());
 
-        displayEvents(filtered);
+        displayEvents(currentEvents);
     }
 
     private String safe(String value) {
